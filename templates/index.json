@@ -1,0 +1,43 @@
+
+{
+  "sections": {
+    "assignment_hero": {
+      "type": "assignment-hero",
+      "settings": {
+        "bg_image": "shopify://shop_images/asignment-1-image.jpg",
+        "heading": "Spring break",
+        "button_label": "SHOP THE COLLECTION",
+        "show_reviews": true
+      }
+    },
+    "assignment_drop_teaser": {
+      "type": "assignment-drop-teaser",
+      "settings": {
+        "heading": "New drop coming soon",
+        "target_datetime": "2026-10-31T23:59:59Z",
+        "show_minutes": true,
+        "caption": "Sneak peak..."
+      }
+    },
+    "assignment_display_text": {
+      "type": "assignment-display-text",
+      "settings": {
+        "title": "Best sellers"
+      }
+    },
+    "assignment_product_grid": {
+      "type": "assignment-product-grid",
+      "settings": {
+        "title": "Featured Products",
+        "collection": "all",
+        "products_to_show": 8
+      }
+    }
+  },
+  "order": [
+    "assignment_hero",
+    "assignment_drop_teaser",
+    "assignment_display_text",
+    "assignment_product_grid"
+  ]
+}

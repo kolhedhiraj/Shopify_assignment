@@ -1,0 +1,524 @@
+.assignment-drop-teaser {
+    width: auto;
+    margin: 20px 20px 0 20px;
+    box-sizing: border-box;
+    max-width: none;
+}
+.drop-teaser__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 567px;
+  width: 100%;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   LEFT PANEL
+   ========================================================================== */
+.drop-teaser__panel--left {
+  background-color: #3b2219;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+}
+
+.drop-teaser__pattern-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.drop-teaser__content-left {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 520px;
+  margin-top: 20%;
+}
+
+.drop-teaser__lock-icon {
+  margin-bottom: 12px;
+}
+
+
+
+/* Clock Row */
+.countdown-section{
+  background-image: url('../assets/assign-drop-teaser.svg');
+      background-size: cover;
+}
+.heart-icon {
+    background-image: url(../assets/heart-icon.svg);
+    background-size: cover;
+    width: 25px;
+    height: 41px;
+    display: block;
+    margin-left: 30px;
+}
+.drop-teaser__clock {
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+
+.clock-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.digit-pair {
+  display: flex;
+  gap: 4px;
+}
+
+/* Individual digit boxes matching Figma */
+.digit-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 48px;
+  background-color: #ffffff;
+  color: #211512;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.clock-separator {
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 48px;
+  padding: 0 2px;
+}
+
+/* Script labels underneath digit tiles */
+.clock-label {
+  font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+  font-size: 1.3rem;
+  color: #f1dfd3;
+  margin-top: 10px;
+  line-height: 1;
+}
+
+.drop-teaser__zero-state {
+  color: #ffffff;
+  font-family: 'Pinyon Script', cursive;
+  font-size: 2.2rem;
+  margin-top: 16px;
+}
+
+/* ==========================================================================
+   RIGHT PANEL
+   ========================================================================== */
+.drop-teaser__panel--right {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+}
+
+.drop-teaser__card {
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.drop-teaser__image-box {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.drop-teaser__card-img,
+.drop-teaser__card-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.drop-teaser__card-caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+/* Newsletter Input Row */
+.drop-teaser__notify-box {
+  width: 100%;
+}
+
+.drop-teaser__input-group {
+  display: flex;
+  align-items: center;
+  border-bottom: 1.5px solid #111111;
+  padding-bottom: 6px;
+}
+
+.drop-teaser__input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.95rem;
+  color: #111111;
+  padding: 4px 0;
+}
+
+.drop-teaser__input::placeholder {
+  color: #888888;
+}
+
+.drop-teaser__btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #111111;
+  cursor: pointer;
+  padding: 4px 0;
+  letter-spacing: 0.05em;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.drop-teaser__btn:hover {
+  opacity: 0.7;
+}
+
+.drop-teaser__alert {
+  font-size: 0.9rem;
+  padding: 8px 0;
+}
+.drop-teaser__alert--success {
+  color: #0e8345;
+  font-weight: 600;
+}
+.drop-teaser__alert--error {
+  color: #c91919;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 990px) {
+  .drop-teaser__container {
+    grid-template-columns: 1fr;
+  }
+  .drop-teaser__panel--left {
+    min-height: 460px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .digit-box {
+    width: 28px;
+    height: 38px;
+    font-size: 1.2rem;
+  }
+  .clock-separator {
+    font-size: 1.2rem;
+    line-height: 38px;
+  }
+  .drop-teaser__image-box {
+    height: 220px;
+  }
+}
+.shopify-section.section-drop-teaser {
+    padding: 20px 0px 0px 0px;
+}
+.drop-teaser__wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  min-height: 519px;
+}
+
+/* ---------------- LEFT PANEL ---------------- */
+.drop-teaser__panel-left {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.drop-teaser__pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+}
+
+.drop-teaser__left-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.drop-teaser__lock {
+  margin-bottom: 8px;
+}
+
+.drop-teaser__heading {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(2.4rem, 3.5vw, 3.6rem);
+  font-weight: 400;
+  color: #ffffff;
+  display: flex;
+  margin: 0 0 32px 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.drop-teaser__timer {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.timer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timer-digits {
+  display: flex;
+  gap: 4px;
+}
+
+.timer-digits span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 48px;
+  background: #ffffff;
+  color: #111111;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+.timer-colon {
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 48px;
+}
+
+.timer-label {
+  font-family: 'Pinyon Script', cursive;
+  font-size: 1.3rem;
+  color: #f1dfd3;
+  margin-top: 8px;
+}
+
+.drop-teaser__live-msg {
+  color: #ffffff;
+  font-family: 'Pinyon Script', cursive;
+  font-size: 2.2rem;
+  margin-top: 16px;
+}
+
+/* ---------------- RIGHT PANEL (FIGMA: 692 x 519, #FFFBF8) ---------------- */
+.drop-teaser__panel-right {
+    background-color: #fffbf8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    box-sizing: border-box;
+    border: 1px dotted;
+}
+
+.drop-card {
+  width: 100%;
+  max-width: 660px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.drop-card__image-container {
+    position: relative;
+    width: 100%;
+    max-height: 365px;
+    background-color: #e5e5e5;
+}
+
+.drop-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.drop-card__caption {
+  position: absolute;
+  bottom: 24px;
+  left: 28px;
+  font-family: 'Instrument Serif Italic';
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.drop-card__form-area {
+  padding: 20px 8px 12px 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.drop-card__label {
+    font-family: 'Instrument Serif';
+    font-size: 1rem;
+    font-weight: 500;
+    color: #111111;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+.drop-card__input-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #111111;
+  padding-bottom: 8px;
+}
+
+.drop-card__input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: #111111;
+  width: 100%;
+  padding: 0;
+}
+
+.drop-card__input::placeholder {
+  color: #999999;
+}
+
+.drop-card__submit {
+    background: none;
+    border: none;
+    font-family: 'Website/Body/Font Family Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #111111;
+    width: 120px;
+    height: 48px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+.drop-card__submit:hover {
+  opacity: 0.7;
+}
+
+.drop-card__status {
+  margin: 0 0 8px 0;
+  font-size: 0.85rem;
+}
+.drop-card__status--success { color: #0d8a43; }
+.drop-card__status--error { color: #d02020; }
+
+/* ---------------- RESPONSIVE BREAKPOINTS ---------------- */
+@media screen and (max-width: 990px) {
+  .drop-teaser__wrapper {
+    grid-template-columns: 1fr;
+  }
+  .drop-teaser__panel-left {
+    min-height: 480px;
+  }
+  .drop-card {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .drop-card__image-container {
+    height: 240px;
+  }
+  .timer-digits span {
+    width: 28px;
+    height: 38px;
+    font-size: 1.2rem;
+  }
+  .timer-colon {
+    font-size: 1.2rem;
+    line-height: 38px;
+  }
+}
+/* animation */
+
+/* Smooth pop-in for countdown digit tiles */
+@keyframes tilePop {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.timer-unit .digits span {
+  animation: tilePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Elegant focus state animation for email input */
+.drop-teaser__newsletter input[type="email"] {
+  transition: border-color 0.3s ease, padding-left 0.3s ease;
+}
+.drop-teaser__newsletter input[type="email"]:focus {
+  padding-left: 4px;
+  border-bottom-color: #f7e7d6;
+}

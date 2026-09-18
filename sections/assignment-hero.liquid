@@ -1,0 +1,124 @@
+{{ 'assignment-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="assignment-hero" id="assignment-hero-{{ section.id }}">
+ <div class="assignment-hero__bg">
+  {%- if section.settings.bg_image != blank -%}
+    {{ section.settings.bg_image | image_url: width: 2880 | image_tag: 
+      loading: 'eager', 
+      fetchpriority: 'high',
+      class: 'assignment-hero__image',
+      alt: section.settings.bg_image.alt | escape 
+    }}
+  {%- else -%}
+    <img 
+      src="{{ 'asignment-1-image.jpg' | asset_url }}" 
+      alt="Spring Break Hero Background" 
+      class="assignment-hero__image"
+      loading="eager"
+      fetchpriority="high"
+      width="1440"
+      height="810"
+    >
+  {%- endif -%}
+</div>
+
+  <div class="assignment-hero__overlay">
+    <div class="assignment-hero__content">
+    <h1 class="assignment-hero__title">
+  {%- assign words = section.settings.heading | split: ' ' -%}
+  {%- for word in words -%}
+    {%- if forloop.first -%}
+      <span class="script-a">{{ word }}</span>
+    {%- elsif forloop.index == 2 -%}
+    
+      <span class="script-c"><span class="eclipse-text">84</span><span class="script-b">{{ word | slice: 0 }}</span>{{ word | slice: 1, word.size }}</span>{% unless forloop.last %} {% endunless %}
+    {%- else -%}
+      {{ word }}{% unless forloop.last %} {% endunless %}
+    {%- endif -%}
+  {%- endfor -%}
+</h1>
+{%- liquid
+  assign target_link = '#assignment-product-grid'
+  if section.settings.button_collection != blank
+    assign target_link = section.settings.button_collection.url
+  elsif section.settings.button_link != blank
+    assign target_link = section.settings.button_link
+  endif
+-%}
+
+{%- if section.settings.button_label != blank -%}
+  <a 
+    href="{{ target_link }}" 
+    class="assignment-hero__btn"
+  >
+    {{ section.settings.button_label }}
+  </a>
+{%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.show_reviews -%}
+  <button type="button" class="assignment-hero__reviews-tab" aria-label="Customer Reviews">
+    <span>Reviews</span>
+  </button>
+{%- endif -%}
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.js-scroll-to-grid');
+    if (!btn) return;
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector('#assignment-product-grid');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // Fallback: If grid is on collection page instead of same page
+        window.location.href = '{{ routes.all_products_collection_url }}';
+      }
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Assignment Hero",
+  "tag": "section",
+  "class": "section-assignment-hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Spring break"
+    },
+{
+  "type": "text",
+  "id": "button_label",
+  "label": "Button Label",
+  "default": "SHOP THE COLLECTION"
+},
+{
+  "type": "collection",
+  "id": "button_collection",
+  "label": "Button Collection Link"
+},
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Display Reviews Tab",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Assignment Hero"
+    }
+  ]
+}
+{% endschema %}

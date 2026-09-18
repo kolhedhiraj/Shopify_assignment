@@ -1,0 +1,121 @@
+<section class="assignment-display-text" id="display-text-{{ section.id }}">
+  <div class="display-text__inner">
+    <h2 
+  class="display-text__title" 
+  style="{% if section.settings.fill_image != blank %}--fill-url: url('{{ section.settings.fill_image | image_url: width: 2000 }}');{% endif %}"
+>
+  {%- assign text = section.settings.title | default: "Best sellers" -%}
+  <span class="display-text__first-letter">{{ text | slice: 0 }}</span>{{ text | slice: 1, text.size }}
+</h2>
+  </div>
+</section>
+
+<style>
+  .assignment-display-text {
+    width: 100%;
+    max-width: 1440px;
+    margin: 40px auto 60px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .display-text__inner {
+    display: inline-block;
+  }
+
+.display-text__title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-style: normal;
+  font-size: clamp(4rem, 20.8vw, 18.75rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin: 0;
+  color: #111111;
+  background-image: url("{{ 'text-mak-image.png' | asset_url }}");
+  background-size: 160% 160%;
+  background-position: center top;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  user-select: text;
+  animation: textMaskVideoPan 50s ease-in-out infinite alternate;
+  will-change: background-position, background-size;
+}
+
+/* Fallback for browsers that do not support text clipping */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .display-text__title {
+    -webkit-text-fill-color: currentColor;
+    color: #111111;
+    background: none;
+    animation: none;
+  }
+}
+
+/* Pan and Zoom keyframes mimicking video panning */
+@keyframes textMaskVideoPan {
+  0% {
+    background-position: 50% 15%;
+    background-size: 200% 600%;
+  }
+  50% {
+    background-position: 45% 65%;
+    background-size: 200% 600%;
+  }
+  100% {
+    background-position: 55% 90%;
+    background-size: 200% 600%;
+  }
+}
+
+/* Accessibility: Disable motion when user requests reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .display-text__title {
+    animation: none;
+    background-position: center center;
+    background-size: cover;
+  }
+}
+.display-text__title .display-text__first-letter {
+  display: inline-block;
+  font-family: 'Pinyon Script', cursive;
+  font-size: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+  /* Safe fallback if background-clip is unsupported */
+  @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+    .display-text__title {
+      -webkit-text-fill-color: currentColor;
+      color: #222222;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Assignment Display Text",
+  "tag": "section",
+  "class": "section-assignment-display-text",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading Text",
+      "default": "Best sellers"
+    },
+    {
+      "type": "image_picker",
+      "id": "fill_image",
+      "label": "Text Fill Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Assignment Display Text"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,141 @@
+{% comment %}
+  Matches Figma Test 2 specifications (214 x 415px)
+{% endcomment %}
+
+{%- liquid
+  assign current_variant = card_product.selected_or_first_available_variant
+  assign has_compare_price = false
+  if current_variant.compare_at_price > current_variant.price
+    assign has_compare_price = true
+  endif
+
+  assign is_clearance = false
+  assign is_final_sale = false
+  for tag in card_product.tags
+    assign downcased_tag = tag | downcase
+    if downcased_tag contains 'clearance'
+      assign is_clearance = true
+    elsif downcased_tag contains 'final sale' or downcased_tag contains 'final-sale'
+      assign is_final_sale = true
+    endif
+  endfor
+
+  assign color_option_index = -1
+  for option in card_product.options_with_values
+    assign downcased_name = option.name | downcase
+    if downcased_name == 'color' or downcased_name == 'colour'
+      assign color_option_index = forloop.index0
+      assign color_values = option.values
+    endif
+  endfor
+-%}
+
+<div class="assignment-card" data-product-id="{{ card_product.id }}" id="Card-{{ card_product.id }}">
+  <div class="assignment-card__media-wrap">
+    <!-- Badges (Hidden layers from Figma) -->
+    <div class="assignment-card__badges">
+      {%- if is_clearance -%}
+        <span class="badge badge--clearance">Clearance</span>
+      {%- elsif is_final_sale -%}
+        <span class="badge badge--final-sale">Final Sale</span>
+      {%- elsif card_product.available == false -%}
+        <span class="badge badge--soldout">Sold out</span>
+      {%- endif -%}
+    </div>
+
+    <!-- Product Image -->
+    <a href="{{ current_variant.url | default: card_product.url }}" class="assignment-card__image-link">
+      {%- if card_product.featured_media -%}
+        <img
+          src="{{ current_variant.featured_media | default: card_product.featured_media | image_url: width: 428 }}"
+          alt="{{ card_product.featured_media.alt | default: card_product.title | escape }}"
+          class="assignment-card__image js-card-img"
+          loading="lazy"
+          width="214"
+          height="285"
+        >
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'assignment-card__placeholder' }}
+      {%- endif -%}
+    </a>
+
+    <!-- Overlay Bottom Controls: Swatches Capsule & Quick Add Icon -->
+    <div class="assignment-card__overlay-bottom">
+      <!-- White Swatch Pill -->
+      {%- if color_option_index != -1 and color_values.size > 0 -%}
+        <div class="swatch-capsule" aria-label="Color options">
+          {%- for color in color_values limit: 4 -%}
+            {%- liquid
+              assign variant_for_color = null
+              for v in card_product.variants
+                if v.options[color_option_index] == color
+                  assign variant_for_color = v
+                  break
+                endif
+              endfor
+            -%}
+            <button
+              type="button"
+              class="swatch-dot{% if forloop.first %} is-active{% endif %}"
+              data-variant-id="{{ variant_for_color.id }}"
+              data-variant-price="{{ variant_for_color.price | money }}"
+              data-variant-compare="{% if variant_for_color.compare_at_price > variant_for_color.price %}{{ variant_for_color.compare_at_price | money }}{% endif %}"
+              data-variant-available="{{ variant_for_color.available }}"
+              data-variant-image="{% if variant_for_color.featured_media %}{{ variant_for_color.featured_media | image_url: width: 428 }}{% else %}{{ card_product.featured_media | image_url: width: 428 }}{% endif %}"
+              data-variant-url="{{ variant_for_color.url | default: card_product.url }}"
+              data-variant-title="{{ card_product.title }} - {{ color }}"
+              style="background-color: {{ color | downcase | remove: ' ' }};"
+              title="{{ color }}"
+              aria-label="{{ color }}"
+            ></button>
+          {%- endfor -%}
+
+          {%- if color_values.size > 4 -%}
+            <span class="swatch-more" title="{{ color_values.size | minus: 4 }} more colors">+</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <!-- Shopping Bag Quick Add Button -->
+      <button
+        type="button"
+        class="quick-add-bag js-quick-add"
+        data-variant-id="{{ current_variant.id }}"
+        aria-label="Add to bag"
+        {% unless current_variant.available %}disabled{% endunless %}
+      >
+        <svg class="bag-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Details Block -->
+  <div class="assignment-card__details">
+    <h3 class="assignment-card__title">
+      <a href="{{ current_variant.url | default: card_product.url }}" class="js-card-link">
+        {%- if color_option_index != -1 and current_variant.options[color_option_index] != blank -%}
+          {{ card_product.title }} - {{ current_variant.options[color_option_index] }}
+        {%- else -%}
+          {{ card_product.title }}
+        {%- endif -%}
+      </a>
+    </h3>
+
+    <!-- Secondary line (Metafield, Type, or Vendor) -->
+    <p class="assignment-card__subtitle">
+      {{ card_product.type | default: card_product.vendor | default: "Performance Velvet" }}
+    </p>
+
+    <!-- Price -->
+    <div class="assignment-card__price js-card-price">
+      <span class="price-regular">{{ current_variant.price | money }}</span>
+      {%- if has_compare_price -%}
+        <s class="price-compare">{{ current_variant.compare_at_price | money }}</s>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

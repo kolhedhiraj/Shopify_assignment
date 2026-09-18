@@ -1,0 +1,308 @@
+html {
+  scroll-behavior: smooth;
+}
+.assignment-hero {
+  position: relative;
+  width: 100%;
+  height: clamp(480px, 56.25vw, 810px); /* Scales smoothly from mobile up to 1440x810 desktop */
+  margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assignment-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.assignment-hero__image,
+.assignment-hero__placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.assignment-hero__overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.assignment-hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(16px, 2vw, 24px);
+  position: relative;
+}
+
+/* Base headline container */
+.assignment-hero__title {
+  font-family: 'instrument serif', serif;
+  font-size: clamp(2.5rem, 6.5vw, 6.25rem); /* Dynamically scales between 40px and 100px */
+  line-height: 1.1;
+  font-style: normal;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+  margin: 0px 0 0 -138px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  max-width: 100%;
+}
+
+/* First word / prefix segment */
+.assignment-hero__title .script-a {
+  font-style: normal;
+  display: inline-block;
+  vertical-align: baseline;
+  font-size: 1em; /* Inherits the fluid clamp size */
+  margin-right: 0.2em;
+}
+
+/* Wrapper around the second word with relative positioning */
+.assignment-hero__title .script-c {
+    display: inline-block;
+    vertical-align: baseline;
+    font-style: normal;
+    font-size: 1em;
+    position: absolute;
+    width: auto;
+    margin: 11px -337px 0px -90px;
+}
+/* Script accent character */
+.assignment-hero__title .script-b {
+  font-family: 'Pinyon Script', 'Snell Roundhand', cursive;
+  font-style: normal;
+  font-size: 1.25em;
+  display: inline-block;
+  vertical-align: baseline;
+  text-transform: uppercase;
+  line-height: 0.8;
+  margin-right: -0.05em;
+}
+
+/* Scalable ellipse outline around the accented letter */
+.eclipse-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 74px;
+    height: 1.4em;
+    transform: translate(-1%, -122%) rotate(-6deg);
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    pointer-events: none;
+    font-size: 25px;
+}
+
+/* Call to action button */
+.assignment-hero__btn {
+  display: inline-block;
+  background-color: #6ee7e7;
+  color: #111111;
+  padding: clamp(10px, 1.2vw, 14px) clamp(22px, 2.5vw, 34px);
+  font-size: clamp(0.75rem, 1vw, 0.95rem);
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  white-space: nowrap;
+}
+
+.assignment-hero__btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+button.assignment-hero__reviews-tab {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  font-size: 16px;
+}
+/* Vertical reviews tab */
+.assignment-hero__reviews-tab {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-20rem) rotate(-90deg);
+  transform-origin: right bottom;
+  background: #ffffff;
+  color: #111111;
+  padding: 6px 14px;
+  font-size: clamp(0.7rem, 0.8vw, 0.8rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 3;
+  cursor: pointer;
+  border: none;
+}
+
+/* Mobile & Small Screen Adaptations */
+@media screen and (max-width: 768px) {
+  .assignment-hero {
+    height: 480px;
+  }
+
+  .assignment-hero__title {
+    line-height: 1.2;
+    gap: 4px;
+  }
+
+  .assignment-hero__reviews-tab {
+    padding: 4px 10px;
+    font-size: 0.68rem;
+  }
+  .assignment-hero__title {
+    font-family: "instrument serif", serif;
+    font-size: clamp(2.5rem, 6.5vw, 6.25rem);
+    line-height: 1.1;
+    font-style: normal;
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 0 -61px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, .15);
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    max-width: 100%;
+}
+.eclipse-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 1.4em;
+    transform: translate(-1%, -122%) rotate(-6deg);
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    pointer-events: none;
+    font-size: 11px;
+}
+.assignment-hero__title .script-c {
+    display: inline-block;
+    vertical-align: baseline;
+    font-style: normal;
+    font-size: 1em;
+    position: absolute;
+    width: auto;
+    margin: 4px -208px 0 -90px;
+}
+}
+
+@media screen and (max-width: 480px) {
+  .assignment-hero {
+    height: 420px;
+  }
+
+  .assignment-hero__overlay {
+    padding: 0 12px;
+  }
+
+  .assignment-hero__btn {
+    padding: 10px 20px;
+  }
+  .assignment-hero__title {
+    font-family: "instrument serif", serif;
+    font-size: clamp(2.5rem, 6.5vw, 6.25rem);
+    line-height: 1.1;
+    font-style: normal;
+    font-weight: 400;
+    color: #fff;
+    margin: 0 0 0 -61px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, .15);
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    max-width: 100%;
+}
+.eclipse-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 32px;
+    height: 1.4em;
+    transform: translate(-1%, -122%) rotate(-6deg);
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    pointer-events: none;
+    font-size: 11px;
+}
+.assignment-hero__title .script-c {
+    display: inline-block;
+    vertical-align: baseline;
+    font-style: normal;
+    font-size: 1em;
+    position: absolute;
+    width: auto;
+    margin: 4px -208px 0 -90px;
+}
+}
+
+/* animation */
+/* Cinematic entry for Hero text lockup */
+@keyframes heroEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.assignment-hero__content {
+  animation: heroEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Smooth hover scaling for the CTA button */
+.assignment-hero__btn {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+.assignment-hero__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(110, 231, 231, 0.3);
+}
+
+/* Subtle pulse loop on the Reviews tab */
+@keyframes softPulse {
+  0%, 100% { transform: translateY(-50%) rotate(-90deg) scale(1); }
+  50% { transform: translateY(-50%) rotate(-90deg) scale(1.03); }
+}
+.assignment-hero__reviews-tab {
+  animation: softPulse 4s ease-in-out infinite;
+}
+/* Subtle moving gradient shimmer inside the letterforms */
+@keyframes shimmerMask {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.display-text__title {
+  background-size: 200% 200%;
+  animation: shimmerMask 8s ease infinite;
+}

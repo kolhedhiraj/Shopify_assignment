@@ -1,0 +1,82 @@
+{{ 'assignment-product-grid.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'assignment-card.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign target_collection = section.settings.collection
+  assign product_limit = section.settings.products_to_show | default: 8
+  
+  if target_collection != blank and target_collection.products_count > 0
+    assign products_list = target_collection.products
+  elsif collections['all'] != blank and collections['all'].products_count > 0
+    assign products_list = collections['all'].products
+  else
+    assign products_list = collections.first.products
+  endif
+-%}
+
+<section class="assignment-product-grid-section" id="assignment-product-grid">
+  <div class="page-width">
+    {%- if section.settings.title != blank -%}
+      <h2 class="assignment-product-grid__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="assignment-product-grid">
+      {%- if products_list.size > 0 -%}
+        {%- for product in products_list limit: product_limit -%}
+          <div class="assignment-product-grid__item">
+            {% render 'assignment-product-card', card_product: product %}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Fallback placeholder cards if store has no products yet {%- endcomment -%}
+        {%- for i in (1..product_limit) -%}
+          <div class="assignment-product-grid__item assignment-product-grid__item--placeholder">
+            <div class="product-card-placeholder">
+              {{ 'product-' | append: i | placeholder_svg_tag: 'placeholder-svg' }}
+              <p class="placeholder-title">Sample Product {{ i }}</p>
+              <p class="placeholder-price">$19.99</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Assignment Product Grid",
+  "tag": "section",
+  "class": "section-assignment-product-grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured Products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8,
+      "label": "Products to Show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Assignment Product Grid",
+      "settings": {
+        "title": "Featured Products",
+        "products_to_show": 8
+      }
+    }
+  ]
+}
+{% endschema %}
