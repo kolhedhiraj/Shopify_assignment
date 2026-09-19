@@ -3650,8 +3650,8 @@ details-disclosure > details {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #261610; /* Deepest rich espresso tone */
-  color: #f7e7d6;
+    background-color: #6ee6e7;
+    color: #421702;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3702,7 +3702,7 @@ details-disclosure > details {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  color: #d1b5a5;
+  color: #421702;
   margin-bottom: 8px;
   animation: fadeSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -3713,7 +3713,7 @@ details-disclosure > details {
   font-size: clamp(3.2rem, 6vw, 4.5rem);
   font-weight: 400;
   letter-spacing: 0.02em;
-  color: #f7e7d6;
+  color: #421702;
   margin: 0;
   animation: fadeSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
 }
@@ -3756,7 +3756,7 @@ details-disclosure > details {
   font-family: monospace;
   font-size: 0.75rem;
   letter-spacing: 0.15em;
-  color: rgba(247, 231, 214, 0.6);
+  color: #42170299;
 }
 
 @keyframes fadeSlideUp {
